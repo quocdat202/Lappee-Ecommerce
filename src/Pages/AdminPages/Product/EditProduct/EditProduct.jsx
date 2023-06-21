@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-
+import URL from '../../../../DATA/URL.jsx';
 export default function EditProduct({ product }) {
     const [isReadonly, setisReadonly] = useState(true);
     const [flag, setFlag] = useState(false);
@@ -36,7 +36,7 @@ export default function EditProduct({ product }) {
     });
     const showFormInfo = () => {
         if (isReadonly === true) return (
-            <div className={flag===false?"product-input-form":"page-hide"}>
+            <div className={flag === false ? "product-input-form" : "page-hide"}>
                 <div className="product-input-subtitle"> Đây là thông tin chung của sản phẩm</div>
                 <div className="input-form">
                     <div className="input-form-item">
@@ -118,7 +118,7 @@ export default function EditProduct({ product }) {
             </div>
         );
         else return (
-            <div className={flag===false?"product-input-form":"page-hide"}>
+            <div className={flag === false ? "product-input-form" : "page-hide"}>
                 <div className="product-input-subtitle"> Chỉnh sửa thông tin chung của sản phẩm</div>
                 <div className="input-form">
                     <div className="input-form-item">
@@ -201,7 +201,7 @@ export default function EditProduct({ product }) {
         )
     }
     const handleClick = () => {
-        axios.put(`https://localhost:44343/data/product/`, pro)
+        axios.put(`${URL}/data/product/`, pro)
             .then((res) => {
                 console.log(res);
                 alert("Thay đổi thông tin thành công!");

@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import Solver from "../../../Classes/Solver";
 import axios from "axios";
+import URL from "../../../DATA/URL";
 
 export default function ListProducts({ pros, addProductInCart }) {
   const history = useHistory();
@@ -74,7 +75,7 @@ export default function ListProducts({ pros, addProductInCart }) {
                 <a className="af" onClick={() => handleViewDetails(pro)}>
                   <img
                     className="img-pro"
-                    src={`https://localhost:44343/Images/Products/${pro.nameimage}`}
+                    src={`${URL}/Images/Products/${pro.nameimage}`}
                     alt="Product Name"
                   />
                 </a>

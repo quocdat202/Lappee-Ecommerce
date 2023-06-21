@@ -2,6 +2,7 @@ import React from 'react'
 import './Users.css'
 import axios from 'axios'
 import { useState, useEffect, useRef } from 'react'
+import URL from '../../../DATA/URL.jsx'
 export default function Users() {
     const [usersncd, setUsersncd] = useState([]);
     const saveUserncd = useRef(null);
@@ -11,7 +12,7 @@ export default function Users() {
     const [activencd, setActivencd] = useState(false);
     const [userncd, setUserncd] = useState({ id: null, firstname: null, lastname: null, email: null, pass: null, sdt: null, diachi: null, nameimage: null, mode: 'CUSTOMER' });
     useEffect(() => {
-        axios.get('https://localhost:44343/data/user/')
+        axios.get(`${URL}/data/user/`)
             .then(res => setUsersncd(res.data))
             .catch(() => setUsersncd([]));
     }, [updateDatancd]);
@@ -51,7 +52,7 @@ export default function Users() {
             alert("Số điện thoại không hợp lệ");
             return;
         }
-        axios.post('https://localhost:44343/data/user', {
+        axios.post(`${URL}/data/user`, {
             firstname: userncd.firstname,
             lastname: userncd.lastname,
             email: userncd.email,
@@ -76,7 +77,7 @@ export default function Users() {
             alert("Không thay đổi");
             return;
         }
-        axios.put('https://localhost:44343/data/user', userncd).then(() => {
+        axios.put(`${URL}/data/user`, userncd).then(() => {
             alert("Saved");
             reLoadncd();
         })
@@ -88,7 +89,7 @@ export default function Users() {
             return;
         }
         if (window.confirm("Xác nhận xóa ?")) {
-            axios.delete(`https://localhost:44343/data/user/${usersncd.id}`).then(() => {
+            axios.delete(`${URL}/data/user/${usersncd.id}`).then(() => {
                 reLoadncd();
                 resetUserncd();
                 alert("Deleted");
@@ -96,7 +97,7 @@ export default function Users() {
         }
     }
     const searchUserWithMode = (mode) => {
-        axios.get(`https://localhost:44343/data/user/mode=${mode}`, null).then(res => {
+        axios.get(`${URL}/data/user/mode=${mode}`, null).then(res => {
             alert("lấy dữ liệu thành công");
             setUsersncd(res.data);
         }).catch((err) => {
@@ -111,7 +112,7 @@ export default function Users() {
             return;
         }
         if (modeSearch === 'id') {
-            axios.get(`https://localhost:44343/data/user/id=${value}`, null).then(res => {
+            axios.get(`${URL}/data/user/id=${value}`, null).then(res => {
                 setUsersncd(res.data);
             }).catch((err) => {
                 alert("Không tìm thấy người dùng");
@@ -119,7 +120,7 @@ export default function Users() {
             });
         }
         if (modeSearch === 'email') {
-            axios.get(`https://localhost:44343/data/user/email=${value}`, null)
+            axios.get(`${URL}/data/user/email=${value}`, null)
                 .then(res => {
                     alert("lấy dữ liệu thành công");
                     console.log(res.data);
@@ -130,7 +131,7 @@ export default function Users() {
                 });
         }
         if (modeSearch === 'sdt') {
-            axios.get(`https://localhost:44343/data/user/sdt=${value}`, null).then(res => {
+            axios.get(`${URL}/data/user/sdt=${value}`, null).then(res => {
                 alert("lấy dữ liệu thành công");
                 setUsersncd(res.data);
             }).catch((err) => {
@@ -139,7 +140,7 @@ export default function Users() {
             });
         }
         if (modeSearch === 'name') {
-            axios.get(`https://localhost:44343/data/user/name=${value}`, null).then(res => {
+            axios.get(`${URL}/data/user/name=${value}`, null).then(res => {
                 alert("lấy dữ liệu thành công");
                 setUsersncd(res.data);
             }).catch((err) => {
@@ -240,13 +241,13 @@ export default function Users() {
                             <div className="userncd-button-group">
                                 <div className="userncd-inFor-item userncd-search">
                                     <select defaultValue={''} className="select-mode-search-permission" onChange={(e) => {
-                                            searchUserWithMode(e.target.value.toString());
+                                        searchUserWithMode(e.target.value.toString());
                                     }}>
                                         <option value="ADMIN">Admin</option>
                                         <option value="CUSTOMER">Customer</option>
                                         <option value="STAFF">Staff</option>
                                     </select>
-                                
+
                                     <select defaultValue={modeSearch} className="select-mode-search" onChange={(e) => {
                                         setModeSearch(e.target.value.toString());
                                     }}>

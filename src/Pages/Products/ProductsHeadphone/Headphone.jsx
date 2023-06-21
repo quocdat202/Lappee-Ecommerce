@@ -30,9 +30,9 @@ export default function Headphone({ idUser, match, addProductToCart }) {
       } else if (match.match.params.attribute === "gia") {
         API = `${URL}/data/product/type=headphone/from=${match.match.params.from}to=${match.match.params.to}`;
       }
-    } else API = "https://localhost:44343/data/Product/type=headphone";
+    } else API = `${URL}/data/Product/type=headphone`;
     axios
-      .get(API, null) //Default value "https://localhost:44343/data/Product/type=screen"
+      .get(API, null) //Default value "${URL}/data/Product/type=screen"
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -84,7 +84,7 @@ export default function Headphone({ idUser, match, addProductToCart }) {
     }
   }
   function showProWithPrice() {
-    axios.get(`https://localhost:44343/data/product/type=headphone/from=${firstprice}to=${lastprice}`)
+    axios.get(`${URL}/data/product/type=headphone/from=${firstprice}to=${lastprice}`)
       .then((res) => setPros(res.data))
       .catch((err) => console.error(err))
   }

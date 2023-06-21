@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import invoice from "../../CSS/invoice.css"
 import Invoice from './Invoice';
+import URL from '../../DATA/URL';
 const solver = new Solver();
 export default function StaffBills({ match }) {
     const history = useHistory();
@@ -27,7 +28,7 @@ export default function StaffBills({ match }) {
 
 
     useEffect(() => {
-        axios.get(`https://localhost:44343/data/bill/status=Đã xác nhận`, null)
+        axios.get(`${URL}/data/bill/status=Đã xác nhận`, null)
             .then(res => {
                 setInvoice(res.data);
             })
@@ -35,7 +36,7 @@ export default function StaffBills({ match }) {
     }, [])
     console.log("ôpp", invoice)
     useEffect(() => {
-        axios.get(`https://localhost:44343/data/bill/status=${statusBill}`, null)
+        axios.get(`${URL}/data/bill/status=${statusBill}`, null)
             .then(res => {
                 // res.data.forEach(element => {
                 //     if(element.idBill === saveBill.current.id)  setBill(element);
@@ -46,7 +47,7 @@ export default function StaffBills({ match }) {
     }, [statusBill, reload])
     useEffect(() => {
         if (saveBill.current !== null) {
-            axios.get(`https://localhost:44343/data/bill/getbill/update/${saveBill.current.id}`, null)
+            axios.get(`${URL}/data/bill/getbill/update/${saveBill.current.id}`, null)
                 .then(res => {
                     console.log(res.data);
                     setBill(res.data);
@@ -61,7 +62,7 @@ export default function StaffBills({ match }) {
     console.log(saveBill.current);
     console.log("ádas", bill);
     const actionBill = (idBill, action) => {
-        axios.get(`https://localhost:44343/data/bill/action=${action}/${idBill}`, null)
+        axios.get(`${URL}/data/bill/action=${action}/${idBill}`, null)
             .then(res => {
                 updateData();
                 showLoadOrder()
@@ -85,7 +86,7 @@ export default function StaffBills({ match }) {
     }
     const searchBillByID = () => {
         if (idBill) {
-            axios.get(`https://localhost:44343/data/bill/${idBill}`, null)
+            axios.get(`${URL}/data/bill/${idBill}`, null)
                 .then(res => setBills(res.data))
                 .catch(() => {
                     setBills([]);
@@ -98,7 +99,7 @@ export default function StaffBills({ match }) {
     console.log("23", bills)
     const searchBillByIdCustomer = () => {
         if (idCustomer) {
-            axios.get(`https://localhost:44343/data/bill/idCustomer=${idCustomer}`, null)
+            axios.get(`${URL}/data/bill/idCustomer=${idCustomer}`, null)
                 .then(res => setBills(res.data))
                 .catch(() => {
                     setBills([]);
@@ -110,7 +111,7 @@ export default function StaffBills({ match }) {
     }
     const updateBill = () => {
         if (bill !== null) {
-            axios.get(`https://localhost:44343/data/bill/address=${bill.diachinhan}`, null)
+            axios.get(`${URL}/data/bill/address=${bill.diachinhan}`, null)
                 .then(res => {
                     updateData();
                     alert("Sửa địa chỉ thành công")
@@ -122,7 +123,7 @@ export default function StaffBills({ match }) {
         if (action == 'decrease' && quantity === 1) {
             if (bill.billDetails.length === 1) {
                 if (window.confirm("Xác nhận xóa đơn hàng?")) {
-                    axios.delete(`https://localhost:44343/data/bill/${bill.id}`, null)
+                    axios.delete(`${URL}/data/bill/${bill.id}`, null)
                         .then(res => {
                             setBill(null);
                             updateData();
@@ -132,7 +133,7 @@ export default function StaffBills({ match }) {
                 }
             } else {
                 if (window.confirm("Xác nhận xóa 1 sản phẩm ?")) {
-                    axios.get(`https://localhost:44343/data/bill/action=delete/billdetail/idbill=${idBill}/idproduct=${idProduct}`, null)
+                    axios.get(`${URL}/data/bill/action=delete/billdetail/idbill=${idBill}/idproduct=${idProduct}`, null)
                         .then(res => {
                             updateData();
                         })
@@ -140,7 +141,7 @@ export default function StaffBills({ match }) {
                 }
             }
         } else {
-            axios.get(`https://localhost:44343/data/bill/action=${action}/billdetail/idbill=${idBill}/idproduct=${idProduct}`, null)
+            axios.get(`${URL}/data/bill/action=${action}/billdetail/idbill=${idBill}/idproduct=${idProduct}`, null)
                 .then(res => {
                     updateData();
                 })

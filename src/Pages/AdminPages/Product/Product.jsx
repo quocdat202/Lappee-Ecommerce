@@ -6,13 +6,13 @@ import "./Product.css"
 import EditProduct from './EditProduct/EditProduct';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import URL from '../../../DATA/URL.jsx';
 
 export default function Product({ idUser }) {
     const [pros, setPros] = useState("");
     const [product, setProduct] = useState(null);
     useEffect(() => {
-        axios.get(`https://localhost:44343/data/product/${pros}`)
+        axios.get(`${URL}/data/product/${pros}`)
             .then((res) => {
                 setProduct(res.data);
             })

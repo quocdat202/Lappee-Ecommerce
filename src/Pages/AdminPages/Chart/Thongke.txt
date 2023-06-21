@@ -34,7 +34,7 @@ export default function Thongke() {
       };
     
     useEffect(() =>{
-      axios.get(`https://localhost:44343/data/statistics/bill/date=${date}`)
+      axios.get(`${URL}/data/statistics/bill/date=${date}`)
          .then((res) => 
          setItemTK(res.data))
          .catch((err) => console.log("Reload User"+err));

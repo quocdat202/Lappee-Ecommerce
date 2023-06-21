@@ -23,10 +23,11 @@ import edit_property_32px from "../../../Images/edit_property_32px.png";
 import settings_32px from "../../../Images/settings_32px.png";
 import { NavLink } from "react-router-dom"
 import PostsScreen from "./PostsScreen";
+import URL from "../../../DATA/URL";
 // function renderGoiypro() {
 //   useEffect(() => {
 //     axios
-//       .get("https://localhost:44343/data/Product/type=laptop", null)
+//       .get("${URL}/data/Product/type=laptop", null)
 //       .then((res) => {
 //         console.log(res);
 //         setDetail(res.data);
@@ -35,13 +36,13 @@ import PostsScreen from "./PostsScreen";
 //   }, []);
 // };
 
-export default function DetailProductsScreen({idUser, match, addProductToCart}) {
+export default function DetailProductsScreen({ idUser, match, addProductToCart }) {
   const solver = new Solver();
   const [detail, setDetail] = useState({});
   useEffect(() => {
     axios
       .get(
-        `https://localhost:44343/data/product/type=screen/${match.match.params.id}`
+        `${URL}/data/product/type=screen/${match.match.params.id}`
       )
       .then((res) => {
         setDetail(res.data);
@@ -90,23 +91,23 @@ export default function DetailProductsScreen({idUser, match, addProductToCart}) 
   }
   function videoReview() {
     var cpu = detail.ten
-    if(new RegExp("60Hz").test(cpu) === true){
+    if (new RegExp("60Hz").test(cpu) === true) {
       return (
         <>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/VM1-uLZJoiQ" title="YouTube video player" 
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/VM1-uLZJoiQ" title="YouTube video player"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
           </iframe>
-          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/bAziTE3mBE4" title="YouTube video player" 
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/bAziTE3mBE4" title="YouTube video player"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
           </iframe>
         </>
-    )
-    }else{
+      )
+    } else {
       return (
         <>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/HP5wRjiHLrE" title="YouTube video player" frameborder="0" 
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/HP5wRjiHLrE" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
           </iframe>
           <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/BwNNgxtPpBU" title="YouTube video player" frameborder="0"
@@ -123,32 +124,32 @@ export default function DetailProductsScreen({idUser, match, addProductToCart}) 
           {/* {isEmptyObj === false && (
               <> */}
           <div className="ttchung">
-          <div className="col-md-15 tops">
+            <div className="col-md-15 tops">
               <div className="home-icon">
                 <NavLink to="/" className="img-backhome">
-                  <img className="icon-home"  src={home}/>
-                  </NavLink>
-                  <p> {">"} </p>
-                  <div className="title-carticon">
-                    <div className="title-txt">{detail.ten} {" "} {detail.screenDetail && detail.screenDetail.mauhienthi} </div>
-                  </div>
+                  <img className="icon-home" src={home} />
+                </NavLink>
+                <p> {">"} </p>
+                <div className="title-carticon">
+                  <div className="title-txt">{detail.ten} {" "} {detail.screenDetail && detail.screenDetail.mauhienthi} </div>
+                </div>
               </div>
             </div>
             <div className=" row imagesPro">
               <div className="col-md-6 product-slider imgsl">
-              <div className="slider">
-                <div className="images">
+                <div className="slider">
+                  <div className="images">
                     <input type="radio" name="slide" id="img1" />
                     <input type="radio" name="slide" id="img2" />
                     <input type="radio" name="slide" id="img3" />
-                    <img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
+                    <img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoM6_aeASERfgpGT61eVLwWgWoAjZWXVuH8g&usqp=CAU" className="m2" alt="img2" />
-                </div>
-                <div className="dots">
-                    <label for="img1"><img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
+                  </div>
+                  <div className="dots">
+                    <label for="img1"><img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
                     <label for="img2"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoM6_aeASERfgpGT61eVLwWgWoAjZWXVuH8g&usqp=CAU" className="m2" alt="img2" /></label>
+                  </div>
                 </div>
-              </div>
                 <div className="col detail-pro">
                   <p>
                     - Kiểu màn hình:{" "}
@@ -198,20 +199,20 @@ export default function DetailProductsScreen({idUser, match, addProductToCart}) 
                   </div>
                   <div className="tt-price">
                     <p className="price-new">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.gia
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.gia
+                      )}
                     </p>
                     <p className="price-old">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.giacu
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.giacu
+                      )}
                     </p>
                   </div>
                   <div className="tt-sales">Quà tặng kèm khi mua hàng</div>
@@ -223,13 +224,13 @@ export default function DetailProductsScreen({idUser, match, addProductToCart}) 
                   </div>
                   <div className="button-gr">
                     <NavLink to="/cart">
-                    <button type="button" className="btn btn-primary btn-buy" onClick={() => addProductToCart(idUser,detail.id,detail.gia)}>
-                      MUA NGAY
-                    </button>
+                      <button type="button" className="btn btn-primary btn-buy" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
+                        MUA NGAY
+                      </button>
                     </NavLink>
                     <button
                       type="button"
-                      className="btn btn-outline-primary btn-cart" onClick={() => addProductToCart(idUser,detail.id,detail.gia)}>
+                      className="btn btn-outline-primary btn-cart" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
                       THÊM VÀO GIỎ HÀNG
                     </button>
                   </div>
@@ -306,7 +307,7 @@ export default function DetailProductsScreen({idUser, match, addProductToCart}) 
               <div className="mt-pro">
                 <span>Đang cập nhật</span>
                 {/* <img
-                  src={`https://localhost:44343/Images/Products/${detail.nameimage}`}
+                  src={`${URL}/Images/Products/${detail.nameimage}`}
                 /> */}
               </div>
             </div>
@@ -434,14 +435,14 @@ export default function DetailProductsScreen({idUser, match, addProductToCart}) 
               <span
                 className="btn-prev btnnp"
                 id="btn-prevs"
-                // onClick={changeSlide(-1)}
+              // onClick={changeSlide(-1)}
               >
                 <img src={prev_50px} />
               </span>
               <span
                 className="btn-next btnnp"
                 id="btn-nexts"
-                // onClick={changeSlide(1)}
+              // onClick={changeSlide(1)}
               >
                 <img src={next_50px} />
               </span>
@@ -452,7 +453,7 @@ export default function DetailProductsScreen({idUser, match, addProductToCart}) 
               </div>
             </div>
             <div className="xemthem">
-                <p>Video đánh giá</p>
+              <p>Video đánh giá</p>
             </div>
             <div className="video-danhgia">
               {videoReview()}

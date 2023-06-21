@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import "./Product.css"
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom'
-
+import URL from '../../../DATA/URL.jsx';
 
 export default function Product({ idUser, clickEditProduct }) {
     let history = useHistory();
@@ -14,13 +14,13 @@ export default function Product({ idUser, clickEditProduct }) {
     const [search, setSearch] = useState([]);
     useEffect(() => {
         if (type === "")
-            axios.get(`https://localhost:44343/data/product`)
+            axios.get(`${URL}/data/product`)
                 .then((res) => {
                     setpros(res.data);
                 })
                 .catch((err) => console.log(err))
         else {
-            axios.get(`https://localhost:44343/data/product/type=${type}`)
+            axios.get(`${URL}/data/product/type=${type}`)
                 .then((res) => {
                     setpros(res.data);
                 })
@@ -28,40 +28,39 @@ export default function Product({ idUser, clickEditProduct }) {
         }
     }, [type])
     const handleSearch = (e) => {
-        if (e.target.value) 
-        { 
+        if (e.target.value) {
             const temp = [];
             if (type === "")
-                axios.get(`https://localhost:44343/data/product`)
+                axios.get(`${URL}/data/product`)
                     .then((res) => {
                         setSearch(res.data);
                     })
                     .catch((err) => console.log(err))
             else {
-                axios.get(`https://localhost:44343/data/product/type=${type}`)
+                axios.get(`${URL}/data/product/type=${type}`)
                     .then((res) => {
                         setSearch(res.data);
                     })
                     .catch((err) => console.log(err))
             }
-            search.forEach((pro)=>{
-                if (pro.id.indexOf(e.target.value)!==-1) temp.push(pro);
+            search.forEach((pro) => {
+                if (pro.id.indexOf(e.target.value) !== -1) temp.push(pro);
             })
             setpros(temp);
         } else {
             if (type === "")
-                axios.get(`https://localhost:44343/data/product`)
+                axios.get(`${URL}/data/product`)
                     .then((res) => {
                         setpros(res.data);
                     })
                     .catch((err) => console.log(err))
             else {
-                axios.get(`https://localhost:44343/data/product/type=${type}`)
+                axios.get(`${URL}/data/product/type=${type}`)
                     .then((res) => {
                         setpros(res.data);
                     })
                     .catch((err) => console.log(err))
-        }
+            }
         }
     }
 
@@ -109,7 +108,7 @@ export default function Product({ idUser, clickEditProduct }) {
                     <option value="keyboard" >Bàn phím</option>
                     <option value="pc" >Máy tính để bàn</option>
                 </select>
-                <input className='product-search' type={'text'} placeholder='Nhập mã để tìm kiếm' onChange={(e)=>handleSearch(e)}></input>
+                <input className='product-search' type={'text'} placeholder='Nhập mã để tìm kiếm' onChange={(e) => handleSearch(e)}></input>
                 <div className="product-button-button">
                     <Link to={`/admin/${idUser}/product/add`} > <MdAddBox className="product-button-icon" /> </Link>
                 </div>
@@ -127,7 +126,7 @@ export default function Product({ idUser, clickEditProduct }) {
                         <th className='product-item-header'>Sửa</th>
                     </tr>
                     {renderTable()}
-                </table>    
+                </table>
             </div>
             <div className='product-bottom-button'>
                 <button className="product-page-button" onClick={() => { (page > 1) ? setPage(page - 1) : setPage(page) }}>Trang Trước </button>

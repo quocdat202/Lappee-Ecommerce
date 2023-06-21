@@ -39,7 +39,7 @@ export default function Products({ match }) {
   //       API =  `${URL}/data/laptop/${match.match.params.attribute}=${match.match.params.value}`;
   //     }
   //   }
-  //   else API = "https://localhost:44343/data/Product/type=laptop";
+  //   else API = "${URL}/data/Product/type=laptop";
 
   //   axios
   //     .get(API, null)
@@ -50,7 +50,7 @@ export default function Products({ match }) {
   //   addProductToCart(idUser,id,gia);
   // }
   useEffect(() => {
-    axios.get(`https://localhost:44343/data/product/name=${match.match.params.namepro}`, null)
+    axios.get(`${URL}/data/product/name=${match.match.params.namepro}`, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err))
   }, []);
@@ -66,7 +66,7 @@ export default function Products({ match }) {
   console.log("pp", match.match.params.namepro)
   function sortLaptop(e) {
     var sorts = e.target.value
-    axios.get("https://localhost:44343/data/laptop/" + sorts, null)
+    axios.get(`${URL}/data/laptop/` + sorts, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err))
   }
@@ -113,7 +113,7 @@ export default function Products({ match }) {
 
 
   function showProWithPrice() {
-    axios.get(`https://localhost:44343/data/product/type=laptop/from=${firstprice}to=${lastprice}`)
+    axios.get(`${URL}/data/product/type=laptop/from=${firstprice}to=${lastprice}`)
       .then((res) => {
         console.log(res.title);
         if (res.status === 200) {

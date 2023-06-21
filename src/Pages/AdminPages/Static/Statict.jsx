@@ -1,15 +1,15 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Statict.css"
-import { Bar, Line} from "react-chartjs-2";
-import Chart from 'chart.js/auto'; 
+import { Bar, Line } from "react-chartjs-2";
+import Chart from 'chart.js/auto';
 import moment from 'moment';
+import URL from '../../../DATA/URL.jsx';
 
 
-
-export default function Statict ({ }){
+export default function Statict({ }) {
     const [select, setSelect] = useState("month");
     const [dateRange, setDateRange] = useState([null, null]);
     const [startDate, endDate] = dateRange;
@@ -20,24 +20,22 @@ export default function Statict ({ }){
     const refmonth = useRef(null);
     const refyear = useRef(null);
 
-    const selectChartMonth = (e) =>
-    {
-        axios.get(`https://localhost:44343/data/statistics/bill/month=${moment(month).toDate().getMonth()+1}/year=${moment(month).toDate().getFullYear().toString()}`)
+    const selectChartMonth = (e) => {
+        axios.get(`${URL}/data/statistics/bill/month=${moment(month).toDate().getMonth() + 1}/year=${moment(month).toDate().getFullYear().toString()}`)
             .then(
-                res=>{
+                res => {
                     const resData = res.data;
                     let labels = [];
                     let datas = [];
-                    let z =  moment(month).toDate().getFullYear().toString()+ "-" + moment(month).toDate().getMonth()+1;
-                    if (labels.length!==(moment(z,"yyyy mm").daysInMonth()))
-                    for (let i=0; i<=moment(z,"yyyy mm").daysInMonth();i++)
-                    {
-                        labels.push(i);
-                        datas.push(0);
-                    }
-                    resData.forEach((datare)=>{                
+                    let z = moment(month).toDate().getFullYear().toString() + "-" + moment(month).toDate().getMonth() + 1;
+                    if (labels.length !== (moment(z, "yyyy mm").daysInMonth()))
+                        for (let i = 0; i <= moment(z, "yyyy mm").daysInMonth(); i++) {
+                            labels.push(i);
+                            datas.push(0);
+                        }
+                    resData.forEach((datare) => {
                         const temp = (moment(datare.ngaydat).toDate().getDate());
-                        datas[temp]+=datare.tongtien;
+                        datas[temp] += datare.tongtien;
                     });
                     setgraph(
                         {
@@ -56,12 +54,11 @@ export default function Statict ({ }){
                     console.log(graph);
                 }
             )
-            .catch(err=>{
+            .catch(err => {
                 let labels = [];
                 let datas = [];
-                let z =  moment(month).toDate().getFullYear().toString()+ "-" + moment(month).toDate().getMonth()+1;
-                for (let i=1; i<=moment(z,"yyyy mm").daysInMonth();i++)
-                {
+                let z = moment(month).toDate().getFullYear().toString() + "-" + moment(month).toDate().getMonth() + 1;
+                for (let i = 1; i <= moment(z, "yyyy mm").daysInMonth(); i++) {
                     console.log(i);
                     labels.push(i);
                     datas.push(0);
@@ -88,20 +85,19 @@ export default function Statict ({ }){
         selectChartMonth()
     }, [month])
 
-    const selectChartYear = (e) =>
-    {
-        axios.get(`https://localhost:44343/data/statistics/bill/year/${year}`)
+    const selectChartYear = (e) => {
+        axios.get(`${URL}/data/statistics/bill/year/${year}`)
             .then(
-                res=>{
+                res => {
                     const resData = res.data;
-                    let labels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+                    let labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                     let datas = [];
-                    labels.forEach((la)=>{
+                    labels.forEach((la) => {
                         datas.push(0);
                     })
-                    resData.forEach((datare)=>{                
+                    resData.forEach((datare) => {
                         const temp = (moment(datare.ngaydat).toDate().getMonth());
-                        datas[temp]+=datare.tongtien;
+                        datas[temp] += datare.tongtien;
                     });
                     console.log(datas);
                     setgraph(
@@ -121,10 +117,10 @@ export default function Statict ({ }){
                     console.log(graph);
                 }
             )
-            .catch(err=>{
-                let labels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            .catch(err => {
+                let labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 let datas = [];
-                labels.forEach((la)=>{
+                labels.forEach((la) => {
                     datas.push(0);
                 })
                 setgraph(
@@ -149,35 +145,34 @@ export default function Statict ({ }){
         selectChartYear()
     }, [year])
 
-    const selectChartFrom = (e) =>
-    {
+    const selectChartFrom = (e) => {
         console.log(dateRange);
-        let sd = (moment(dateRange[0]).toDate().getMonth()+1).toString() + "-" + moment(dateRange[0]).toDate().getDate().toString() + "-" + moment(dateRange[0]).toDate().getFullYear().toString();
-        let ed = (moment(dateRange[1]).toDate().getMonth()+1).toString() + "-" + moment(dateRange[1]).toDate().getDate().toString() + "-" + moment(dateRange[1]).toDate().getFullYear().toString();
-        console.log(`https://localhost:44343/data/statistics/bill/from=${sd}to=${ed}`);
-        axios.get(`https://localhost:44343/data/statistics/bill/from=${sd}to=${ed}			`)
+        let sd = (moment(dateRange[0]).toDate().getMonth() + 1).toString() + "-" + moment(dateRange[0]).toDate().getDate().toString() + "-" + moment(dateRange[0]).toDate().getFullYear().toString();
+        let ed = (moment(dateRange[1]).toDate().getMonth() + 1).toString() + "-" + moment(dateRange[1]).toDate().getDate().toString() + "-" + moment(dateRange[1]).toDate().getFullYear().toString();
+        console.log(`${URL}/data/statistics/bill/from=${sd}to=${ed}`);
+        axios.get(`${URL}/data/statistics/bill/from=${sd}to=${ed}			`)
             .then(
-                res=>{
+                res => {
 
                     const resData = res.data;
                     let labels = [];
                     let datas = [];
-                    let start = moment(dateRange[0],"mm dd yyyy");
-                    let end = moment(dateRange[1],"mm dd yyyy");
+                    let start = moment(dateRange[0], "mm dd yyyy");
+                    let end = moment(dateRange[1], "mm dd yyyy");
                     console.log("Chạy nè");
                     let diff = end.diff(start, 'day')
                     let range = []
                     for (let i = 0; i <= diff; i++) {
                         range.push(moment(dateRange[0]).add(i, 'day'));
                     }
-                    range.forEach((ran)=>{
+                    range.forEach((ran) => {
                         labels.push(ran.toDate().toLocaleDateString());
                         datas.push(0);
                     })
-                    resData.forEach((datare)=>{                
+                    resData.forEach((datare) => {
                         const temp = (moment(datare.ngaydat).toDate().toLocaleDateString());
                         let i = labels.indexOf(temp)
-                        datas[i]+=datare.tongtien;
+                        datas[i] += datare.tongtien;
                     });
                     setgraph(
                         {
@@ -196,20 +191,20 @@ export default function Statict ({ }){
 
                 }
             )
-            .catch(err=>{
+            .catch(err => {
                 let labels = [];
                 let datas = [];
-                let start = moment(dateRange[0],"mm dd yyyy");
-                let end = moment(dateRange[1],"mm dd yyyy");
+                let start = moment(dateRange[0], "mm dd yyyy");
+                let end = moment(dateRange[1], "mm dd yyyy");
                 let diff = end.diff(start, 'day')
                 let range = []
                 for (let i = 0; i <= diff; i++) {
                     range.push(moment(dateRange[0]).add(i, 'day'));
                 }
-                range.forEach((ran)=>{
+                range.forEach((ran) => {
                     labels.push(ran.toDate().toLocaleDateString());
                 });
-                labels.forEach((la)=>{
+                labels.forEach((la) => {
                     datas.push(0);
                 })
                 setgraph(
@@ -237,42 +232,42 @@ export default function Statict ({ }){
     const showSelect = () => {
         switch (select) {
             case "day":
-                return(
+                return (
                     <div className="statict-form-value">
                         <p className="static-form-label" >Nhập ngày cần tìm: </p>
                         <input type="date" className="static-input" ></input>
                     </div>);
             case "month":
-                return(
+                return (
                     <div className="statict-form-value">
                         <p className="static-form-label" >Nhập tháng cần tìm: </p>
-                        <input type="month" className="static-input" ref={refmonth} onClick={(e)=>setMonth(e.target.value)}></input>
+                        <input type="month" className="static-input" ref={refmonth} onClick={(e) => setMonth(e.target.value)}></input>
                     </div>)
             case "year":
-                return(
+                return (
                     <div className="statict-form-value">
                         <p className="static-form-label">Nhập năm cần tìm: </p>
-                        <input type="number" min="1900" max="2099" step="1" defaultValue="2021" ref={refyear} className="static-input" onClick={(e)=>setYear(e.target.value)}/>
+                        <input type="number" min="1900" max="2099" step="1" defaultValue="2021" ref={refyear} className="static-input" onClick={(e) => setYear(e.target.value)} />
                     </div>);
             case "fromto":
                 return (
                     <div className="statict-form-value">
                         <p className="static-form-label"> Chọn khoản ngày: </p>
                         <DatePicker className="static-input"
-                        selectsRange={true}
-                        startDate={startDate}
-                        endDate={endDate}
-                        onChange={(update) => {
-                            setDateRange(update);
-                        }}
-                    />
+                            selectsRange={true}
+                            startDate={startDate}
+                            endDate={endDate}
+                            onChange={(update) => {
+                                setDateRange(update);
+                            }}
+                        />
                     </div>
                 )
             default:
                 break;
-        }    
+        }
     }
-    const handleClick = () =>{
+    const handleClick = () => {
         switch (select) {
             case "month":
                 refmonth.current.click();
@@ -282,7 +277,7 @@ export default function Statict ({ }){
                 break;
             default:
                 break;
-        }     
+        }
     }
     return (
         <div className="statict-main">
@@ -290,22 +285,22 @@ export default function Statict ({ }){
                 <div className="statict-header"> <h2>Thống kê doanh thu</h2></div>
                 <div className="statict-main-page">
                     <div className="statict-top-button">
-                        <select name="statict type" className="statict-select" defaultValue="month" onChange={(e)=>setSelect(e.target.value)}>
+                        <select name="statict type" className="statict-select" defaultValue="month" onChange={(e) => setSelect(e.target.value)}>
                             <option value="month">Tháng</option>
                             <option value="year">Năm</option>
                             <option value="fromto">Khoản ngày</option>
                         </select>
                         {showSelect()}
-                        <button onClick={()=>handleClick()}>Chọn</button>
+                        <button onClick={() => handleClick()}>Chọn</button>
                     </div>
                     <div className="statict-chart-panel">
-                        {graph.length!==0?
-                        <div className="statict-show-panel">
-                            <Line data={graph} className="statict-chart"/>
-                        </div>
-                        
+                        {graph.length !== 0 ?
+                            <div className="statict-show-panel">
+                                <Line data={graph} className="statict-chart" />
+                            </div>
 
-                        :<div>Vui lòng chọn điều kiện lọc</div>}
+
+                            : <div>Vui lòng chọn điều kiện lọc</div>}
                     </div>
                 </div>
             </div>

@@ -31,9 +31,9 @@ export default function Screen({ idUser, match, addProductToCart }) {
       } else if (match.match.params.attribute === "gia") {
         API = `${URL}/data/product/type=screen/from=${match.match.params.from}to=${match.match.params.to}`;
       }
-    } else API = "https://localhost:44343/data/Product/type=screen";
+    } else API = `${URL}/data/Product/type=screen`;
     axios
-      .get(API, null) //Default value "https://localhost:44343/data/Product/type=screen"
+      .get(API, null) //Default value "${URL}/data/Product/type=screen"
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -48,7 +48,7 @@ export default function Screen({ idUser, match, addProductToCart }) {
 
   function sortLaptop(e) {
     var sorts = e.target.value
-    axios.get("https://localhost:44343/data/screen/" + sorts, null)
+    axios.get(`${URL}/data/screen/` + sorts, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err))
   }
@@ -94,7 +94,7 @@ export default function Screen({ idUser, match, addProductToCart }) {
     }
   }
   function showProWithPrice() {
-    axios.get(`https://localhost:44343/data/product/type=screen/from=${firstprice}to=${lastprice}`)
+    axios.get(`${URL}/data/product/type=screen/from=${firstprice}to=${lastprice}`)
       .then((res) => setPros(res.data))
       .catch((err) => console.error(err))
   }

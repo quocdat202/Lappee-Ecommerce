@@ -18,10 +18,11 @@ import whatsapp_32px from "../../../Images/whatsapp_32px.png";
 import edit_property_32px from "../../../Images/edit_property_32px.png";
 import settings_32px from "../../../Images/settings_32px.png";
 import { NavLink } from "react-router-dom"
+import URL from '../../../DATA/URL.jsx';
 // function renderGoiypro() {
 //   useEffect(() => {
 //     axios
-//       .get("https://localhost:44343/data/Product/type=laptop", null)
+//       .get("${URL}/data/Product/type=laptop", null)
 //       .then((res) => {
 //         console.log(res);
 //         setDetail(res.data);
@@ -30,13 +31,13 @@ import { NavLink } from "react-router-dom"
 //   }, []);
 // };
 
-export default function DetailProductsHeadphone({idUser, match, addProductToCart}) {
+export default function DetailProductsHeadphone({ idUser, match, addProductToCart }) {
   const solver = new Solver();
   const [detail, setDetail] = useState({});
   useEffect(() => {
     axios
       .get(
-        `https://localhost:44343/data/product/type=headphone/${match.match.params.id}`
+        `${URL}/data/product/type=headphone/${match.match.params.id}`
       )
       .then((res) => {
         setDetail(res.data);
@@ -92,32 +93,32 @@ export default function DetailProductsHeadphone({idUser, match, addProductToCart
           {/* {isEmptyObj === false && (
               <> */}
           <div className="ttchung">
-          <div className="col-md-15 tops">
+            <div className="col-md-15 tops">
               <div className="home-icon">
                 <NavLink to="/" className="img-backhome">
-                  <img className="icon-home"  src={home}/>
-                  </NavLink>
-                  <p> {">"} </p>
-                  <div className="title-carticon">
-                    <div className="title-txt">{detail.ten}</div>
-                  </div>
+                  <img className="icon-home" src={home} />
+                </NavLink>
+                <p> {">"} </p>
+                <div className="title-carticon">
+                  <div className="title-txt">{detail.ten}</div>
+                </div>
               </div>
             </div>
             <div className=" row imagesPro">
               <div className="col-md-6 product-slider imgsl">
-              <div className="slider">
-                <div className="images">
+                <div className="slider">
+                  <div className="images">
                     <input type="radio" name="slide" id="img1" />
                     <input type="radio" name="slide" id="img2" />
                     <input type="radio" name="slide" id="img3" />
-                    <img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
+                    <img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRigExH88LigwLQQPt6DFM1KaQX6cCuw9DylA&usqp=CAU" className="m2" alt="img2" />
-                </div>
-                <div className="dots">
-                    <label for="img1"><img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
+                  </div>
+                  <div className="dots">
+                    <label for="img1"><img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
                     <label for="img2"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRigExH88LigwLQQPt6DFM1KaQX6cCuw9DylA&usqp=CAU" className="m2" alt="img2" /></label>
+                  </div>
                 </div>
-              </div>
                 <div className="col detail-pro">
                   <p>
                     - Kiểu tai nghe:{" "}
@@ -153,31 +154,31 @@ export default function DetailProductsHeadphone({idUser, match, addProductToCart
                   </div>
                   <div className="tt-price">
                     <p className="price-new">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.gia
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.gia
+                      )}
                     </p>
                     <p className="price-old">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.giacu
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.giacu
+                      )}
                     </p>
                   </div>
                   <div className="button-gr">
                     <NavLink to="/cart">
-                    <button type="button" className="btn btn-primary btn-buy" onClick={() => addProductToCart(idUser,detail.id,detail.gia)}>
-                      MUA NGAY
-                    </button>
+                      <button type="button" className="btn btn-primary btn-buy" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
+                        MUA NGAY
+                      </button>
                     </NavLink>
                     <button
                       type="button"
-                      className="btn btn-outline-primary btn-cart" onClick={() => addProductToCart(idUser,detail.id,detail.gia)}>
+                      className="btn btn-outline-primary btn-cart" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
                       THÊM VÀO GIỎ HÀNG
                     </button>
                   </div>
@@ -254,7 +255,7 @@ export default function DetailProductsHeadphone({idUser, match, addProductToCart
               <div className="mt-pro">
                 <span>Đang cập nhật</span>
                 {/* <img
-                  src={`https://localhost:44343/Images/Products/${detail.nameimage}`}
+                  src={`${URL}/Images/Products/${detail.nameimage}`}
                 /> */}
               </div>
             </div>
@@ -294,31 +295,31 @@ export default function DetailProductsHeadphone({idUser, match, addProductToCart
                   <tr>
                     <th className="row">Kiểu tai nghe</th>
                     <td>
-                    {detail.headphoneDetail && detail.headphoneDetail.kieutainghe}
+                      {detail.headphoneDetail && detail.headphoneDetail.kieutainghe}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Kiểu kết nối</th>
                     <td>
-                    {detail.headphoneDetail && detail.headphoneDetail.kieuketnoi}
+                      {detail.headphoneDetail && detail.headphoneDetail.kieuketnoi}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Kết nối</th>
                     <td>
-                    {detail.headphoneDetail && detail.headphoneDetail.ketnoi}
+                      {detail.headphoneDetail && detail.headphoneDetail.ketnoi}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Kích thước driver</th>
                     <td>
-                    {detail.headphoneDetail && detail.headphoneDetail.kichthuocdriver}
+                      {detail.headphoneDetail && detail.headphoneDetail.kichthuocdriver}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Microphone</th>
                     <td>
-                    {detail.headphoneDetail && detail.headphoneDetail.microphone}
+                      {detail.headphoneDetail && detail.headphoneDetail.microphone}
                     </td>
                   </tr>
                   <tr>
@@ -328,7 +329,7 @@ export default function DetailProductsHeadphone({idUser, match, addProductToCart
                   <tr>
                     <th className="row">Khối lượng</th>
                     <td>
-                    {detail.headphoneDetail && detail.headphoneDetail.khoiluong}
+                      {detail.headphoneDetail && detail.headphoneDetail.khoiluong}
                     </td>
                   </tr>
                 </tbody>
@@ -417,7 +418,7 @@ export default function DetailProductsHeadphone({idUser, match, addProductToCart
               </div>
             </div>
             <div className="col-md-6 addressm">
-            <iframe className="bando" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6696584237025!2d106.68006961509548!3d10.759922362439628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1638173238125!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
+              <iframe className="bando" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6696584237025!2d106.68006961509548!3d10.759922362439628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1638173238125!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
             </div>
           </div>
         </div>

@@ -13,6 +13,7 @@ import banner_pro_left from "../../../Images/banner_pro_left.png"
 import { useEffect, useState } from "react";
 import ListProductMouse from "./ListProductMouse";
 import PostsMouse from "./PostsMouse";
+import URL from "../../../DATA/URL";
 export default function Mouse({ idUser, addProductToCart }) {
   const [pros, setPros] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +24,7 @@ export default function Mouse({ idUser, addProductToCart }) {
 
   useEffect(() => {
     axios
-      .get("https://localhost:44343/data/Product/type=mouse", null)
+      .get(`${URL}/data/Product/type=mouse`, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -38,7 +39,7 @@ export default function Mouse({ idUser, addProductToCart }) {
 
   function sortMouse(e) {
     var sorts = e.target.value
-    axios.get("https://localhost:44343/data/mouse/" + sorts, null)
+    axios.get(`${URL}/data/mouse/` + sorts, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err))
   }
@@ -83,7 +84,7 @@ export default function Mouse({ idUser, addProductToCart }) {
     }
   }
   function showProWithPrice() {
-    axios.get(`https://localhost:44343/data/product/type=mouse/from=${firstprice}to=${lastprice}`)
+    axios.get(`${URL}/data/product/type=mouse/from=${firstprice}to=${lastprice}`)
       .then((res) => setPros(res.data))
       .catch((err) => console.error(err))
   }

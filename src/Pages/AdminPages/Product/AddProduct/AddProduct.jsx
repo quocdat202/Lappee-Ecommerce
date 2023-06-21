@@ -3,7 +3,7 @@ import './AddProduct.css'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import URL from '../../../../DATA/URL.jsx';
 export default function AddProduct({ }) {
     const [idloaiNavigation, setidloaiNavigation] = useState(null);
     const [headphoneDetail, setheadphoneDetail] = useState(null);
@@ -40,8 +40,7 @@ export default function AddProduct({ }) {
     const history = new useHistory();
 
     useEffect(() => {
-        if (img)
-        {
+        if (img) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setpreview(reader.result);
@@ -68,7 +67,7 @@ export default function AddProduct({ }) {
     }
 
     const createProduct = () => {
-        axios.post(`https://localhost:44343/data/product/`, product)
+        axios.post(`${URL}/data/product/`, product)
             .then((res) => {
                 console.log(res);
                 alert("Thành công thông tin");
@@ -78,10 +77,10 @@ export default function AddProduct({ }) {
                 console.log(err);
             })
         const image = new FormData();
-        image.append('file',img);
-        image.append('idProduct',product.id);
+        image.append('file', img);
+        image.append('idProduct', product.id);
         console.log(image);
-        axios.post('https://localhost:44343/data/picture',image)
+        axios.post(`${URL}/data/picture`, image)
             .then(res => {
                 console.log(res.data);
                 alert("Thành công ảnh ");
@@ -755,58 +754,56 @@ export default function AddProduct({ }) {
                         </div>
                     </div>
                 </div>
-            );  else if (key==="picture") return (
-                <div className={flag === true? "product-edit-page":"page-hide"}>
+            ); else if (key === "picture") return (
+                <div className={flag === true ? "product-edit-page" : "page-hide"}>
                     <h2 className="product-edit-title">
                         Thêm ảnh
                     </h2>
                     <div className="product-image">
-                        <input type="file" className='file' onChange={(e)=>handleChangeImg(e)} accept='image/*'></input>
+                        <input type="file" className='file' onChange={(e) => handleChangeImg(e)} accept='image/*'></input>
                         {showimg()}
-                        <button className='product-button-page1' onClick={()=>{setKey("");setproduct({...product,nameimage:img.name})}}>Gửi</button>
-                        <button className='product-button-page1' onClick={()=>setflag(false)}>Hủy</button>
+                        <button className='product-button-page1' onClick={() => { setKey(""); setproduct({ ...product, nameimage: img.name }) }}>Gửi</button>
+                        <button className='product-button-page1' onClick={() => setflag(false)}>Hủy</button>
                     </div>
                 </div>
-            ); else if (key==="") return (
-                <div className={flag === true? "product-edit-page":"page-hide"}>
+            ); else if (key === "") return (
+                <div className={flag === true ? "product-edit-page" : "page-hide"}>
                     <h2 className="product-edit-title">
                         Xác nhận thêm?
                     </h2>
                     <div className="product-image">
-                        <button className='product-button-page1' onClick={()=>createProduct()}>Xác nhận</button>
-                        <button className='product-button-page1' onClick={()=>setflag(false)}>Hủy</button>
+                        <button className='product-button-page1' onClick={() => createProduct()}>Xác nhận</button>
+                        <button className='product-button-page1' onClick={() => setflag(false)}>Hủy</button>
                     </div>
                 </div>
             )
 
     }
-    const handleChangeImg = (e) =>{
+    const handleChangeImg = (e) => {
         setimg(e.target.files[0]);
     }
-    const showimg = () =>{
-        if(!img)
-        {
+    const showimg = () => {
+        if (!img) {
             return (
                 <div className='img-info'>
-                  <h2>Chưa có file nào được chọn</h2>
-              </div>
+                    <h2>Chưa có file nào được chọn</h2>
+                </div>
             )
-        } else if (img.type.search("image")===-1)
-        {
+        } else if (img.type.search("image") === -1) {
             return (
                 <div>
                     <h2>Vui lòng chỉ chọn file hình ảnh!!</h2>
                 </div>
             )
-        } else  return (
+        } else return (
             <div className='product-img-pre-panel'>
-            <h2>Thông tin ảnh:</h2>
-            <p>Tên ảnh: {img.name}</p>
-            <p>Kích cỡ: {img.size} kb</p>   
-            <p>Last Modified:{" "}{img.lastModifiedDate.toDateString()}</p>
-            <img className='product-img-preview' alt="not found" src={preview} />
+                <h2>Thông tin ảnh:</h2>
+                <p>Tên ảnh: {img.name}</p>
+                <p>Kích cỡ: {img.size} kb</p>
+                <p>Last Modified:{" "}{img.lastModifiedDate.toDateString()}</p>
+                <img className='product-img-preview' alt="not found" src={preview} />
             </div>);
-        }
+    }
     return (
         <div className="product-add">
             <div className={flag === false ? "product-edit-page" : "page-hide"}>
@@ -890,7 +887,7 @@ export default function AddProduct({ }) {
                 </div>
                 <div className="product-button">
                     <button className=" product-button-page1" onClick={() => hanndleClickNext()}>Tiếp theo</button>
-                    <button className='product-button-page1' onClick={()=> history.push("/admin/:iduser/product/list")}>Trở lại</button>
+                    <button className='product-button-page1' onClick={() => history.push("/admin/:iduser/product/list")}>Trở lại</button>
                 </div>
             </div>
             {showform()}

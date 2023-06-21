@@ -13,6 +13,7 @@ import banner_pro_left from "../../../Images/banner_pro_left.png"
 import { useEffect, useState } from "react";
 import ListProductKeyboard from "./ListProductKeyboard";
 import PostsKeyboard from "./PostsKeyboard";
+import URL from "../../../DATA/URL";
 export default function Keyboard({ idUser, addProductToCart }) {
   const [pros, setPros] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +24,7 @@ export default function Keyboard({ idUser, addProductToCart }) {
 
   useEffect(() => {
     axios
-      .get("https://localhost:44343/data/Product/type=keyboard", null)
+      .get(`${URL}/data/Product/type=keyboard`, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -37,7 +38,7 @@ export default function Keyboard({ idUser, addProductToCart }) {
 
   function sortKeyboard(e) {
     var sorts = e.target.value
-    axios.get("https://localhost:44343/data/keyboard/" + sorts, null)
+    axios.get(`${URL}/data/keyboard/` + sorts, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err))
   }
@@ -82,7 +83,7 @@ export default function Keyboard({ idUser, addProductToCart }) {
     }
   }
   function showProWithPrice() {
-    axios.get(`https://localhost:44343/data/product/type=keyboard/from=${firstprice}to=${lastprice}`)
+    axios.get(`${URL}/data/product/type=keyboard/from=${firstprice}to=${lastprice}`)
       .then((res) => setPros(res.data))
       .catch((err) => console.error(err))
   }

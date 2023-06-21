@@ -4,13 +4,14 @@ import details from "../../../CSS/ProductsCss/details.css";
 import Solver from "../../../Classes/Solver";
 import freeshipping_4px from "../../../Images/freeshipping_4px.png";
 import { NavLink } from "react-router-dom";
+import URL from "../../../DATA/URL";
 
 export default function SanPhamKhac() {
   const solver = new Solver();
   const [sanpham, setSanpham] = useState([]);
   useEffect(() => {
     axios
-      .get("https://localhost:44343/data/Product/type=laptop", null)
+      .get(`${URL}/data/Product/type=laptop`, null)
       .then((res) => setSanpham(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -24,7 +25,7 @@ export default function SanPhamKhac() {
               <div className="imgname inf-price">
                 <img
                   className="imgkb"
-                  src={`https://localhost:44343/Images/Products/${kb.nameimage}`}
+                  src={`${URL}/Images/Products/${kb.nameimage}`}
                 />
               </div>
             </NavLink>

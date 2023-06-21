@@ -336,7 +336,7 @@ export default function DetailProductsLaptop({ idUser, match, addProductToCart }
               <div className="mt-pro">
                 <span>Đang cập nhật</span>
                 {/* <img
-                  src={`https://localhost:44343/Images/Products/${detail.nameimage}`}
+                  src={`${URL}/Images/Products/${detail.nameimage}`}
                 /> */}
               </div>
             </div>

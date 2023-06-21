@@ -28,7 +28,7 @@ export default function PC({ idUser, addProductToCart, match }) {
         API = `${URL}/data/product/type=pc/from=${match.match.params.from}to=${match.match.params.to}`;
       }
     }
-    else API = "https://localhost:44343/data/Product/type=pc";
+    else API = `${URL}/data/Product/type=pc`;
     axios
       .get(API, null)
       .then((res) => setPros(res.data))
@@ -44,7 +44,7 @@ export default function PC({ idUser, addProductToCart, match }) {
 
   function sortPC(e) {
     var sorts = e.target.value
-    axios.get("https://localhost:44343/data/pc/" + sorts, null)
+    axios.get(`${URL}/data/pc/` + sorts, null)
       .then((res) => setPros(res.data))
       .catch((err) => console.log(err))
   }
@@ -89,7 +89,7 @@ export default function PC({ idUser, addProductToCart, match }) {
     }
   }
   function showProWithPrice() {
-    axios.get(`https://localhost:44343/data/product/type=pc/from=${firstprice}to=${lastprice}`)
+    axios.get(`${URL}/data/product/type=pc/from=${firstprice}to=${lastprice}`)
       .then((res) => setPros(res.data))
       .catch((err) => console.error(err))
   }

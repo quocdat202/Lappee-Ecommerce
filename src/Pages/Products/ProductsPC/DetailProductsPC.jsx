@@ -15,13 +15,14 @@ import whatsapp_32px from "../../../Images/whatsapp_32px.png";
 import edit_property_32px from "../../../Images/edit_property_32px.png";
 import settings_32px from "../../../Images/settings_32px.png";
 import { NavLink } from "react-router-dom"
-export default function DetailProductsPC({idUser, match, addProductToCart}) {
+import URL from "../../../DATA/URL";
+export default function DetailProductsPC({ idUser, match, addProductToCart }) {
   const solver = new Solver();
   const [detail, setDetail] = useState({});
   useEffect(() => {
     axios
       .get(
-        `https://localhost:44343/data/product/type=pc/${match.match.params.id}`
+        `${URL}/data/product/type=pc/${match.match.params.id}`
       )
       .then((res) => {
         setDetail(res.data);
@@ -72,32 +73,32 @@ export default function DetailProductsPC({idUser, match, addProductToCart}) {
     <div className="single-product">
       <div className="container">
         <div className="row row-top">
-        
+
           <div className="ttchung">
-          <div className="col-md-15 tops">
+            <div className="col-md-15 tops">
               <div className="home-icon">
                 <NavLink to="/" className="img-backhome">
-                  <img className="icon-home"  src={home}/>
-                  </NavLink>
-                  <p> {">"} </p>
-                  <div className="title-carticon">
-                    <div className="title-txt">{detail.ten} {" "} {detail.pcdetail && detail.pcdetail.detailcpu} </div>
-                  </div>
+                  <img className="icon-home" src={home} />
+                </NavLink>
+                <p> {">"} </p>
+                <div className="title-carticon">
+                  <div className="title-txt">{detail.ten} {" "} {detail.pcdetail && detail.pcdetail.detailcpu} </div>
+                </div>
               </div>
             </div>
             <div className=" row imagesPro">
               <div className="col-md-6 product-slider imgsl">
-              <div className="slider">
-                <div className="images">
+                <div className="slider">
+                  <div className="images">
                     <input type="radio" name="slide" id="img1" />
                     <input type="radio" name="slide" id="img2" />
                     <input type="radio" name="slide" id="img3" />
-                    <img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
+                    <img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
+                  </div>
+                  <div className="dots">
+                    <label for="img1"><img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
+                  </div>
                 </div>
-                <div className="dots">
-                    <label for="img1"><img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
-                </div>
-              </div>
                 <div className="col detail-pro">
                   <p>
                     - Loại PC: {detail.pcdetail && detail.pcdetail.typepc}
@@ -121,7 +122,7 @@ export default function DetailProductsPC({idUser, match, addProductToCart}) {
                   <p>
                     - VGA: {detail.pcdetail && detail.pcdetail.vgatype}
                   </p>
-                 
+
                 </div>
               </div>
               <div className="col-md-6 colors ttdetail">
@@ -137,20 +138,20 @@ export default function DetailProductsPC({idUser, match, addProductToCart}) {
                   </div>
                   <div className="tt-price">
                     <p className="price-new">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.gia
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.gia
+                      )}
                     </p>
                     <p className="price-old">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.giacu
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.giacu
+                      )}
                     </p>
                   </div>
                   {/* <div className="tt-sales">Quà tặng kèm khi mua hàng</div>
@@ -162,11 +163,11 @@ export default function DetailProductsPC({idUser, match, addProductToCart}) {
                   </div> */}
                   <div className="button-gr">
                     <NavLink to="/cart">
-                    <button type="button" className="btn btn-primary btn-buy" onClick={() =>addProductToCart(idUser,detail.id,detail.gia)}>
-                      MUA NGAY
-                    </button>
+                      <button type="button" className="btn btn-primary btn-buy" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
+                        MUA NGAY
+                      </button>
                     </NavLink>
-                    <button type="button" className="btn btn-outline-primary btn-cart" onClick={() =>addProductToCart(idUser,detail.id,detail.gia)}>
+                    <button type="button" className="btn btn-outline-primary btn-cart" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
                       THÊM VÀO GIỎ HÀNG
                     </button>
                   </div>
@@ -271,49 +272,49 @@ export default function DetailProductsPC({idUser, match, addProductToCart}) {
                   <tr>
                     <th className="row">CPU</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.cpu}
+                      {detail.pcdetail && detail.pcdetail.cpu}
                     </td>
                   </tr>
                   <tr>
                     <th className="row title-detail-pro">Chi tiết CPU</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.detailcpu}
+                      {detail.pcdetail && detail.pcdetail.detailcpu}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Ram</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.ram}
+                      {detail.pcdetail && detail.pcdetail.ram}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Chi tiết Ram</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.detailram}
+                      {detail.pcdetail && detail.pcdetail.detailram}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">VGA</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.vgatype}
+                      {detail.pcdetail && detail.pcdetail.vgatype}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Loại VGA</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.vganame}
+                      {detail.pcdetail && detail.pcdetail.vganame}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">PSU</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.psu}
+                      {detail.pcdetail && detail.pcdetail.psu}
                     </td>
                   </tr>
                   <tr>
                     <th className="row">Case PC</th>
                     <td>
-                    {detail.pcdetail && detail.pcdetail.casepc}
+                      {detail.pcdetail && detail.pcdetail.casepc}
                     </td>
                   </tr>
                 </tbody>
@@ -325,10 +326,10 @@ export default function DetailProductsPC({idUser, match, addProductToCart}) {
               <p>Sản phẩm khác</p>
             </div>
             <div className="prev-next">
-              <span className="btn-prev btnnp"id="btn-prevs" >
+              <span className="btn-prev btnnp" id="btn-prevs" >
                 <img src={prev_50px} />
               </span>
-              <span className="btn-next btnnp"id="btn-nexts">
+              <span className="btn-next btnnp" id="btn-nexts">
                 <img src={next_50px} />
               </span>
             </div>

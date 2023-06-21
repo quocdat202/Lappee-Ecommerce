@@ -1,40 +1,41 @@
 import React from 'react'
-import {useState , useEffect , useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import CALLER from '../../API/API';
 import '../../CSS/Layout10.css';
 import { NavLink } from 'react-router-dom';
-import {BsFillCaretRightFill} from 'react-icons/bs'
-import {BsFillCaretLeftFill} from 'react-icons/bs'
+import { BsFillCaretRightFill } from 'react-icons/bs'
+import { BsFillCaretLeftFill } from 'react-icons/bs'
 import '../../CSS/ScreenPanel.css'
 import Solver from '../../Classes/Solver';
 import { useHistory } from 'react-router';
-const RenderScreenItem= (pro, index ,addCart, history) => {
-    const solver =new Solver();
+import URL from '../../DATA/URL.jsx';
+const RenderScreenItem = (pro, index, addCart, history) => {
+    const solver = new Solver();
     return (
         <div className="col-10-no-padding c-10-2 screen-infor" key={index}>
             <div className="screen-item" to={`screen/${pro.id}`}>
-                <div className="screen-image" onClick={()=>history.push(`screen/${pro.id}`)}>
-                    <img  className="screen-image-img" src={`https://localhost:44343/Images/Products/${pro.nameimage}`} alt={pro.nameimage} /> 
+                <div className="screen-image" onClick={() => history.push(`screen/${pro.id}`)}>
+                    <img className="screen-image-img" src={`${URL}/Images/Products/${pro.nameimage}`} alt={pro.nameimage} />
                 </div>
                 <div className="screen-detail">
-                    <div className="screen-detail-item screen-name" onClick={()=>history.push(`screen/${pro.id}`)}>
+                    <div className="screen-detail-item screen-name" onClick={() => history.push(`screen/${pro.id}`)}>
                         <p>{pro.ten}</p>
                     </div>
                     <div className="screen-detail-item screen-price">
-                        <p className="old-price">{solver.formatCurrency("vi-VN",'currency','VND',pro.giacu)}</p>
-                        <p className="screen-price-value">{solver.formatCurrency("vi-VN",'currency','VND',pro.gia)}</p>
+                        <p className="old-price">{solver.formatCurrency("vi-VN", 'currency', 'VND', pro.giacu)}</p>
+                        <p className="screen-price-value">{solver.formatCurrency("vi-VN", 'currency', 'VND', pro.gia)}</p>
                     </div>
                     <div className="screen-detail-item screen-attributes">
-                        
+
                     </div>
                     <div className="screen-detail-item screen-button-group">
-                        <button className="screen-button screen-button-buy" onClick={()=>{
-                            setTimeout(()=>{
+                        <button className="screen-button screen-button-buy" onClick={() => {
+                            setTimeout(() => {
                                 history.push('/cart');
-                            },300)
-                                addCart(pro.id,pro.gia);
+                            }, 300)
+                            addCart(pro.id, pro.gia);
                         }}>Mua ngay</button>
-                        <button className="screen-button screen-button-add" onClick={()=>addCart(pro.id,pro.gia)}>Thêm vào giỏ</button>
+                        <button className="screen-button screen-button-add" onClick={() => addCart(pro.id, pro.gia)}>Thêm vào giỏ</button>
                     </div>
                 </div>
             </div>
@@ -42,9 +43,9 @@ const RenderScreenItem= (pro, index ,addCart, history) => {
     )
 }
 const getCountPage = (pros) => {
-    return pros.length/5 ;
+    return pros.length / 5;
 }
-export default function ScreenPanel({addCart,products}) {
+export default function ScreenPanel({ addCart, products }) {
     const history = useHistory();
     const [scaleX, setScaleX] = useState(0);
     const index = useRef(0);
@@ -54,19 +55,19 @@ export default function ScreenPanel({addCart,products}) {
     //     .then(res => setScreens(res.data))
     //     .catch(err => setScreens([]))
     // }, [])
-    const handleSwipe = (direction,countSwipe) => {
-        if(index.current === 0 && direction ==='previous'){
+    const handleSwipe = (direction, countSwipe) => {
+        if (index.current === 0 && direction === 'previous') {
             return;
         }
-        if(index.current === countSwipe  && direction ==='next'){
+        if (index.current === countSwipe && direction === 'next') {
             return;
         }
-        if(direction === 'next'){
+        if (direction === 'next') {
             index.current = index.current + 1;
             setScaleX(scaleX - 100);
         }
-        else{
-            index.current =index.current - 1;
+        else {
+            index.current = index.current - 1;
             setScaleX(scaleX + 100);
         }
     }
@@ -79,19 +80,19 @@ export default function ScreenPanel({addCart,products}) {
                 <div className="btn-all-screen" onClick={() => history.push('/screen')}>Xem tất cả{" >>"}</div>
             </div>
             <div className="screen-panel-list">
-                    <div className="swiper-screen-button screen-previous" onClick={()=>handleSwipe('previous',getCountPage(products)-1)}>
-                        <BsFillCaretLeftFill className="swiper-screen-button-icon"/>
-                    </div>
-                    <div className="swiper-screen-button screen-next" onClick={()=>handleSwipe('next',getCountPage(products)-1)}>
-                        <BsFillCaretRightFill className="swiper-screen-button-icon"/>
-                    </div>
-            <div className="container10Col wide screen-container">
-                    <div className="row-10--NoWrap screen-row" style={{transform : `translate(${scaleX}%)` ,transition : '0.5s'}} >
-                        {
-                            products.map((pro,index) => RenderScreenItem(pro,index,addCart,history))
-                        }
+                <div className="swiper-screen-button screen-previous" onClick={() => handleSwipe('previous', getCountPage(products) - 1)}>
+                    <BsFillCaretLeftFill className="swiper-screen-button-icon" />
                 </div>
-            </div>
+                <div className="swiper-screen-button screen-next" onClick={() => handleSwipe('next', getCountPage(products) - 1)}>
+                    <BsFillCaretRightFill className="swiper-screen-button-icon" />
+                </div>
+                <div className="container10Col wide screen-container">
+                    <div className="row-10--NoWrap screen-row" style={{ transform: `translate(${scaleX}%)`, transition: '0.5s' }} >
+                        {
+                            products.map((pro, index) => RenderScreenItem(pro, index, addCart, history))
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     )

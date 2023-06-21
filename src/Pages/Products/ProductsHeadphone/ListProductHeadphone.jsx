@@ -3,7 +3,7 @@ import heart32px from "../../../Images/heart32px.png";
 
 import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
-
+import URL from '../../../DATA/URL.jsx';
 import {
   BrowserRouter as Router,
   Switch,
@@ -44,7 +44,7 @@ export default function ListProductHeadphone({ pros, addProductInCart }) {
                 <a className="af" onClick={() => handleViewDetails(pro)}>
                   <img
                     className="img-pro"
-                    src={`https://localhost:44343/Images/Products/${pro.nameimage}`}
+                    src={`${URL}/Images/Products/${pro.nameimage}`}
                     alt="Product Name"
                   />
                 </a>

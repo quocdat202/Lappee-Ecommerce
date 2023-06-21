@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import "../../CSS/Login.css";
-import URL from '../../DATA/URL.jsx'
+import URL from '../../DATA/URL.jsx';
 
 //import '@fortawesome/fontawesome-free/css/all.min.css';
 import axios from "axios";
@@ -87,7 +87,7 @@ export default function Login({ login, userCookie }) {
         return;
       } else {
         axios
-          .get(`https://localhost:44343/data/user/email=${usertemp.email}`)
+          .get(`${URL}/data/user/email=${usertemp.email}`)
           .then((res) => {
             setuser(res.data);
             showReqSdt();
@@ -116,7 +116,7 @@ export default function Login({ login, userCookie }) {
     if (confirm && usertemp.pass) {
       if (confirm == usertemp.pass) {
         axios
-          .put(`https://localhost:44343/data/user/`, usertemp)
+          .put(`${URL}/data/user/`, usertemp)
           .then(function (response) {
             console.log(response);
             alert("Thay đổi mật khẩu thành công!");
@@ -147,7 +147,7 @@ export default function Login({ login, userCookie }) {
     if (!isnull()) {
       if (confirm === usertemp.pass) {
         axios
-          .post(`https://localhost:44343/data/user/`, usertemp)
+          .post(`${URL}/data/user/`, usertemp)
           .then(function (response) {
             console.log(response);
             alert("Đăng ký thành công!");

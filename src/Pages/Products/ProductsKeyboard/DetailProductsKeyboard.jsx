@@ -26,11 +26,12 @@ import edit_property_32px from "../../../Images/edit_property_32px.png";
 import settings_32px from "../../../Images/settings_32px.png";
 import { NavLink } from "react-router-dom";
 import PostsKeyboard from "./PostsKeyboard";
+import URL from "../../../DATA/URL";
 
 // function renderGoiypro() {
 //   useEffect(() => {
 //     axios
-//       .get("https://localhost:44343/data/Product/type=laptop", null)
+//       .get("${URL}/data/Product/type=laptop", null)
 //       .then((res) => {
 //         console.log(res);
 //         setDetail(res.data);
@@ -39,13 +40,13 @@ import PostsKeyboard from "./PostsKeyboard";
 //   }, []);
 // };
 
-export default function DetailProductsKeyboard({idUser, match, addProductToCart }) {
+export default function DetailProductsKeyboard({ idUser, match, addProductToCart }) {
   const solver = new Solver();
   const [detail, setDetail] = useState({});
   useEffect(() => {
     axios
       .get(
-        `https://localhost:44343/data/product/type=keyboard/${match.match.params.id}`
+        `${URL}/data/product/type=keyboard/${match.match.params.id}`
       )
       .then((res) => {
         // console.log(res);
@@ -99,38 +100,38 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
   }
   function videoReview() {
     var swich = detail.keyboardDetail && detail.keyboardDetail.brandswitch
-    if(new RegExp("DareU").test(swich) === true ){
+    if (new RegExp("DareU").test(swich) === true) {
       return (
         <>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/Ejh-c6xfobA" title="YouTube video player" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
-      <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/eDnPU9DA0uI" title="YouTube video player" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
-      </>
-    )
-    }
-    else if(new RegExp("RK").test(swich) === true){
-      return (
-        <>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/6CvIClAOxOk" title="YouTube video player" frameborder="0" 
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Ejh-c6xfobA" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
           </iframe>
-          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/JdN-hQmH5xk" title="YouTube video player" frameborder="0" 
+          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/eDnPU9DA0uI" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
           </iframe>
         </>
       )
-    }else{
+    }
+    else if (new RegExp("RK").test(swich) === true) {
       return (
         <>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/iw-raTNBwHs" title="YouTube video player" frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-        </iframe>
-        <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/04_6w2WB8nA" title="YouTube video player" frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-        </iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/6CvIClAOxOk" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/JdN-hQmH5xk" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/iw-raTNBwHs" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/04_6w2WB8nA" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
         </>
       )
     }
@@ -142,32 +143,32 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
           {/* {isEmptyObj === false && (
               <> */}
           <div className="ttchung">
-          <div className="col-md-15 tops">
+            <div className="col-md-15 tops">
               <div className="home-icon">
                 <NavLink to="/" className="img-backhome">
-                  <img className="icon-home"  src={home}/>
-                  </NavLink>
-                  <p> {">"} </p>
-                  <div className="title-carticon">
-                    <div className="title-txt">{detail.ten} {" "} {detail.keyboardDetail && detail.keyboardDetail.motaden} </div>
-                  </div>
+                  <img className="icon-home" src={home} />
+                </NavLink>
+                <p> {">"} </p>
+                <div className="title-carticon">
+                  <div className="title-txt">{detail.ten} {" "} {detail.keyboardDetail && detail.keyboardDetail.motaden} </div>
+                </div>
               </div>
             </div>
             <div className=" row imagesPro">
               <div className="col-md-6 product-slider imgsl">
-              <div className="slider">
-                <div className="images">
+                <div className="slider">
+                  <div className="images">
                     <input type="radio" name="slide" id="img1" />
                     <input type="radio" name="slide" id="img2" />
                     <input type="radio" name="slide" id="img3" />
-                    <img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
+                    <img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5Pw3JdXE3VZ7PnPdLap4TcatSzg6ofJzVxQ&usqp=CAU" className="m2" alt="img2" />
-                </div>
-                <div className="dots">
-                    <label for="img1"><img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
+                  </div>
+                  <div className="dots">
+                    <label for="img1"><img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
                     <label for="img2"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5Pw3JdXE3VZ7PnPdLap4TcatSzg6ofJzVxQ&usqp=CAU" className="m2" alt="img2" /></label>
+                  </div>
                 </div>
-              </div>
                 <div className="col detail-pro">
                   <p>
                     - Đèn: {detail.keyboardDetail && detail.keyboardDetail.den}
@@ -213,20 +214,20 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
                   </div>
                   <div className="tt-price">
                     <p className="price-new">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.gia
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.gia
+                      )}
                     </p>
                     <p className="price-old">
-                    {solver.formatCurrency(
-                      "vi-VN",
-                      "currency",
-                      "VND",
-                      detail.giacu
-                    )}
+                      {solver.formatCurrency(
+                        "vi-VN",
+                        "currency",
+                        "VND",
+                        detail.giacu
+                      )}
                     </p>
                   </div>
                   <div className="tt-sales">Quà tặng kèm khi mua hàng</div>
@@ -238,13 +239,13 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
                   </div>
                   <div className="button-gr">
                     <NavLink to="/cart">
-                    <button type="button" className="btn btn-primary btn-buy" onClick={() => addProductToCart(idUser,detail.id,detail.gia)}>
-                      MUA NGAY
-                    </button>
+                      <button type="button" className="btn btn-primary btn-buy" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
+                        MUA NGAY
+                      </button>
                     </NavLink>
                     <button
                       type="button"
-                      className="btn btn-outline-primary btn-cart" onClick={() => addProductToCart(idUser,detail.id,detail.gia)}>
+                      className="btn btn-outline-primary btn-cart" onClick={() => addProductToCart(idUser, detail.id, detail.gia)}>
                       THÊM VÀO GIỎ HÀNG
                     </button>
                   </div>
@@ -305,7 +306,7 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
                     Mua phần mềm Microsoft Office 365 Personal chỉ{" "}
                     <a>990.000đ</a> (Giá mua lẻ 1.290.000đ)
                   </span>
-                 
+
                 </div>
               </div>
             </div>
@@ -319,7 +320,7 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
               <div className="mt-pro">
                 <span>Đang cập nhật</span>
                 {/* <img
-                  src={`https://localhost:44343/Images/Products/${detail.nameimage}`}
+                  src={`${URL}/Images/Products/${detail.nameimage}`}
                 /> */}
               </div>
             </div>
@@ -419,14 +420,14 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
               <span
                 className="btn-prev btnnp"
                 id="btn-prevs"
-                // onClick={changeSlide(-1)}
+              // onClick={changeSlide(-1)}
               >
                 <img src={prev_50px} />
               </span>
               <span
                 className="btn-next btnnp"
                 id="btn-nexts"
-                // onClick={changeSlide(1)}
+              // onClick={changeSlide(1)}
               >
                 <img src={next_50px} />
               </span>
@@ -437,7 +438,7 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
               </div>
             </div>
             <div className="xemthem">
-                <p>Video đánh giá</p>
+              <p>Video đánh giá</p>
             </div>
             <div className="video-danhgia">
               {videoReview()}
@@ -503,7 +504,7 @@ export default function DetailProductsKeyboard({idUser, match, addProductToCart 
               </div>
             </div>
             <div className="col-md-6 addressm">
-            <iframe className="bando" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6696584237025!2d106.68006961509548!3d10.759922362439628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1638173238125!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
+              <iframe className="bando" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6696584237025!2d106.68006961509548!3d10.759922362439628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1638173238125!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
             </div>
           </div>
         </div>

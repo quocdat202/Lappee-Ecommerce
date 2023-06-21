@@ -2,6 +2,7 @@ import React from 'react';
 import './User.css'
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
+import URL from '../../../DATA/URL.jsx';
 export default function User() {
     const [users, setUsers] = useState([]);
     const saveUser = useRef(null);
@@ -11,7 +12,7 @@ export default function User() {
     const [active, setActive] = useState(false);
     const [user, setUser] = useState({ id: null, firstname: null, lastname: null, email: null, pass: null, sdt: null, diachi: null, nameimage: null, mode: 'CUSTOMER' });
     useEffect(() => {
-        axios.get('https://localhost:44343/data/user/')
+        axios.get(`${URL}/data/user/`)
             .then(res => setUsers(res.data))
             .catch(() => setUsers([]));
     }, [updateData]);
@@ -51,7 +52,7 @@ export default function User() {
             alert("Số điện thoại không hợp lệ");
             return;
         }
-        axios.post('https://localhost:44343/data/user', {
+        axios.post(`${URL}/data/user`, {
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
@@ -76,7 +77,7 @@ export default function User() {
             alert("Không thay đổi");
             return;
         }
-        axios.put('https://localhost:44343/data/user', user).then(() => {
+        axios.put(`${URL}/data/user`, user).then(() => {
             alert("Saved");
             reLoad();
         })
@@ -88,7 +89,7 @@ export default function User() {
             return;
         }
         if (window.confirm("Xác nhận xóa ?")) {
-            axios.delete(`https://localhost:44343/data/user/${user.id}`).then(() => {
+            axios.delete(`${URL}/data/user/${user.id}`).then(() => {
                 reLoad();
                 resetUser();
                 alert("Deleted");
@@ -96,7 +97,7 @@ export default function User() {
         }
     }
     const searchUserWithMode = (mode) => {
-        axios.get(`https://localhost:44343/data/user/mode=${mode}`, null).then(res => {
+        axios.get(`${URL}/data/user/mode=${mode}`, null).then(res => {
             alert("lấy dữ liệu thành công");
             setUsers(res.data);
         }).catch((err) => {
@@ -111,7 +112,7 @@ export default function User() {
             return;
         }
         if (modeSearch === 'id') {
-            axios.get(`https://localhost:44343/data/user/id=${value}`, null).then(res => {
+            axios.get(`${URL}/data/user/id=${value}`, null).then(res => {
                 setUsers(res.data);
             }).catch((err) => {
                 alert("Không tìm thấy người dùng");
@@ -119,18 +120,18 @@ export default function User() {
             });
         }
         if (modeSearch === 'email') {
-            axios.get(`https://localhost:44343/data/user/email=${value}`, null)
-            .then(res => {
-                alert("lấy dữ liệu thành công");
-                console.log(res.data);
-                setUsers(res.data);
-            }).catch((err) => {
-                alert("Không tìm thấy người dùng");
-                console.log("getUsersByName failed" + err);
-            });
+            axios.get(`${URL}/data/user/email=${value}`, null)
+                .then(res => {
+                    alert("lấy dữ liệu thành công");
+                    console.log(res.data);
+                    setUsers(res.data);
+                }).catch((err) => {
+                    alert("Không tìm thấy người dùng");
+                    console.log("getUsersByName failed" + err);
+                });
         }
         if (modeSearch === 'sdt') {
-            axios.get(`https://localhost:44343/data/user/sdt=${value}`, null).then(res => {
+            axios.get(`${URL}/data/user/sdt=${value}`, null).then(res => {
                 alert("lấy dữ liệu thành công");
                 setUsers(res.data);
             }).catch((err) => {
@@ -139,7 +140,7 @@ export default function User() {
             });
         }
         if (modeSearch === 'name') {
-            axios.get(`https://localhost:44343/data/user/name=${value}`, null).then(res => {
+            axios.get(`${URL}/data/user/name=${value}`, null).then(res => {
                 alert("lấy dữ liệu thành công");
                 setUsers(res.data);
             }).catch((err) => {
@@ -200,8 +201,8 @@ export default function User() {
                 <div className="userncd-panel-flatForm">
                     {/* <div className="customer-inFor-item inFor-avatar">
                     <img className="user-avatar" src={ user.nameimage !== null ? 
-                                             `https://localhost:44343/Images/UserAvatar/${user.nameimage}`
-                                            :`https://localhost:44343/Images/UserAvatar/NullAvatar.png`
+                                             `${URL}/Images/UserAvatar/${user.nameimage}`
+                                            :`${URL}/Images/UserAvatar/NullAvatar.png`
                                              } alt={user.nameimage}/>
                                 {user.id !== null ? <p className="name-user">{user.firstname+" "+user.lastname}</p> : <p className="name-user">Chưa xác định</p>}
                     </div> */}

@@ -17,13 +17,14 @@ import edit_property_32px from "../../../Images/edit_property_32px.png";
 import settings_32px from "../../../Images/settings_32px.png";
 import { NavLink } from "react-router-dom";
 import PostsMouse from "./PostsMouse";
-export default function DetailProductsMouse({idUser, match, addProductToCart }) {
+import URL from "../../../DATA/URL";
+export default function DetailProductsMouse({ idUser, match, addProductToCart }) {
   const solver = new Solver();
   const [detail, setDetail] = useState({});
   useEffect(() => {
     axios
       .get(
-        `https://localhost:44343/data/product/type=mouse/${match.match.params.id}`
+        `${URL}/data/product/type=mouse/${match.match.params.id}`
       )
       .then((res) => {
         setDetail(res.data);
@@ -74,26 +75,26 @@ export default function DetailProductsMouse({idUser, match, addProductToCart }) 
   }
   function videoReview() {
     var cpu = detail.mouseDetail && detail.mouseDetail.kieuketnoi
-    if(new RegExp("Chuột có dây").test(cpu) === true){
+    if (new RegExp("Chuột có dây").test(cpu) === true) {
       return (
         <>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/lOFgEcmnuIk" title="YouTube video player" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
-      <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/tDaNmV5h7-s" title="YouTube video player" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
-      </>
-    )
-    }else{
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/lOFgEcmnuIk" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/tDaNmV5h7-s" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+        </>
+      )
+    } else {
       return (
         <>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/IabfcavoNRc" title="YouTube video player" frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-        </iframe>
-        <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/7BUE8r74Oac" title="YouTube video player" frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-        </iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/IabfcavoNRc" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+          <iframe className="paddin" width="560" height="315" src="https://www.youtube.com/embed/7BUE8r74Oac" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
         </>
       )
     }
@@ -103,32 +104,32 @@ export default function DetailProductsMouse({idUser, match, addProductToCart }) 
       <div className="container">
         <div className="row row-top">
           <div className="ttchung">
-          <div className="col-md-15 tops">
+            <div className="col-md-15 tops">
               <div className="home-icon">
                 <NavLink to="/" className="img-backhome">
-                  <img className="icon-home"  src={home}/>
-                  </NavLink>
-                  <p> {">"} </p>
-                  <div className="title-carticon">
-                    <div className="title-txt">{detail.ten} </div>
-                  </div>
+                  <img className="icon-home" src={home} />
+                </NavLink>
+                <p> {">"} </p>
+                <div className="title-carticon">
+                  <div className="title-txt">{detail.ten} </div>
+                </div>
               </div>
             </div>
             <div className=" row imagesPro">
               <div className="col-md-6 product-slider imgsl">
-              <div className="slider">
-                <div className="images">
+                <div className="slider">
+                  <div className="images">
                     <input type="radio" name="slide" id="img1" />
                     <input type="radio" name="slide" id="img2" />
                     <input type="radio" name="slide" id="img3" />
-                    <img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
+                    <img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" />
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzwoMCxw4lerPFrWA-_AAUYqvD4THjyBk15g&usqp=CAU" className="m2" alt="img2" />
-                </div>
-                <div className="dots">
-                    <label for="img1"><img src={`https://localhost:44343/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
+                  </div>
+                  <div className="dots">
+                    <label for="img1"><img src={`${URL}/Images/Products/${detail.nameimage}`} className="m1" alt="img1" /></label>
                     <label for="img2"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzwoMCxw4lerPFrWA-_AAUYqvD4THjyBk15g&usqp=CAU" className="m2" alt="img2" /></label>
+                  </div>
                 </div>
-              </div>
                 <div className="col detail-pro">
                   <p>- Màu: {detail.mau}</p>
 
@@ -190,7 +191,7 @@ export default function DetailProductsMouse({idUser, match, addProductToCart }) 
                       <button
                         type="button"
                         className="btn btn-primary btn-buy"
-                        onClick={() => addProductToCart(idUser,detail.id, detail.gia)}
+                        onClick={() => addProductToCart(idUser, detail.id, detail.gia)}
                       >
                         MUA NGAY
                       </button>
@@ -198,7 +199,7 @@ export default function DetailProductsMouse({idUser, match, addProductToCart }) 
                     <button
                       type="button"
                       className="btn btn-outline-primary btn-cart"
-                      onClick={() => addProductToCart(idUser,detail.id, detail.gia)}
+                      onClick={() => addProductToCart(idUser, detail.id, detail.gia)}
                     >
                       THÊM VÀO GIỎ HÀNG
                     </button>
@@ -381,7 +382,7 @@ export default function DetailProductsMouse({idUser, match, addProductToCart }) 
               </div>
             </div>
             <div className="xemthem">
-                <p>Video đánh giá</p>
+              <p>Video đánh giá</p>
             </div>
             <div className="video-danhgia">
               {videoReview()}
@@ -447,7 +448,7 @@ export default function DetailProductsMouse({idUser, match, addProductToCart }) 
               </div>
             </div>
             <div className="col-md-6 addressm">
-            <iframe className="bando" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6696584237025!2d106.68006961509548!3d10.759922362439628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1638173238125!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
+              <iframe className="bando" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6696584237025!2d106.68006961509548!3d10.759922362439628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1638173238125!5m2!1svi!2s" allowfullscreen="" loading="lazy"></iframe>
             </div>
           </div>
         </div>
