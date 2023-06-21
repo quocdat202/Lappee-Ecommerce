@@ -3,7 +3,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Customer.css';
-import URL from '../../../DATA/URL/jsx';
+import URL from '../../../DATA/URL.jsx';
 export default function Customer({ idUser }) {
     const [customers, setCustomers] = useState([]);
     const history = useHistory();
