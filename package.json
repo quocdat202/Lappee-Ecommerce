@@ -25,7 +25,7 @@
     "react-html2pdf": "^1.0.1",
     "react-icons": "^4.3.1",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "react-to-print": "^2.14.3",
     "styled-components": "^5.3.3",
     "sweetalert2": "^11.2.1",
